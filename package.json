@@ -1,0 +1,22 @@
+{
+  "name": "web-auto-screenshot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DviadFer/web-auto-screenshot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DviadFer/web-auto-screenshot/issues"
+  },
+  "homepage": "https://github.com/DviadFer/web-auto-screenshot#readme",
+  "dependencies": {
+    "puppeteer": "^19.6.2"
+  }
+}
