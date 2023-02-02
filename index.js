@@ -4,6 +4,12 @@ const fs = require('fs');
 const resolution = Object.values(require('./resources/resolution.json').resolution);
 const url = Object.values(require('./resources/url').url);
 
+/**
+ * Tis is used to extract a name file from the given URL. 
+ * You can customize it with different js string methods to get the result you want.
+ * @param {string} value 
+ * @returns file name
+ */
 const trimUrl = (value) => {
     let result = value.substring(
         (value.indexOf("/", 8) + 1), 
@@ -13,31 +19,45 @@ const trimUrl = (value) => {
     return result;
 }
 
-async function run () {
+/**
+ * It uses file system package to manage creation/removal of the main folders.
+ * @param {int} screenshotWidth 
+ */
+const manageFolders = (screenshotWidth) => {
+    if (!fs.existsSync(`./images`)) {
+        fs.mkdirSync(`./images`);
+    }
+    if (fs.existsSync(`./images/${screenshotWidth}`)) {
+        fs.rmSync(`./images/${screenshotWidth}`, { recursive: true, force: true });
+    } 
+    fs.mkdirSync(`./images/${screenshotWidth}`);
+}
 
+/**
+ * Main function. Executes script.
+ * It has hardcoded hints to monitor the whole process while executing it on the console.
+ */
+async function run () {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-
-    for (const screeshotWidth of resolution) {
+    // Resolution folder loop
+    for (const screenshotWidth of resolution) {
         await page.setViewport({
-            width: screeshotWidth,
-            height: 850,
+            width: screenshotWidth,
+            height: 850, //This number is just a placeholder since it's required in setViewport and we use fullPage:true in page.screenshot()
         });
-
-        if (fs.existsSync(`./images/${screeshotWidth}`)) {
-            fs.rmSync(`./images/${screeshotWidth}`, { recursive: true, force: true });
-        } 
-        fs.mkdirSync(`./images/${screeshotWidth}`);
-        
+        manageFolders(screenshotWidth);
+        process.stdout.write('Realizando capturas: [')
+        //Screenshot file loop
         for (let [loopCount, value] of url.entries()) {
             let imageName = trimUrl(value);
-
-            console.log(imageName)
             await page.goto(value);
-            await page.screenshot({path: `./images/${screeshotWidth}/${loopCount + 1}-${(imageName != "/") ? imageName : "inicio"}.png`, fullPage: true});
+            await page.screenshot({path: `./images/${screenshotWidth}/${loopCount + 1}-${(imageName != "/") ? imageName : "inicio"}.png`, fullPage: true});
+            process.stdout.write(` ${loopCount + 1}`)
         }
+        process.stdout.write(` ] - ¡Resolución ${screenshotWidth} completada!\n`)
     }
-    
+    process.stdout.write('¡PROCESO COMPLETO!')
     browser.close();
 }
 
