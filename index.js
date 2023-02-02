@@ -47,7 +47,7 @@ async function run () {
             height: 850, //This number is just a placeholder since it's required in setViewport and we use fullPage:true in page.screenshot()
         });
         manageFolders(screenshotWidth);
-        process.stdout.write('Realizando capturas: [')
+        process.stdout.write('Processing screenshots: [')
         //Screenshot file loop
         for (let [loopCount, value] of url.entries()) {
             let imageName = trimUrl(value);
@@ -55,9 +55,9 @@ async function run () {
             await page.screenshot({path: `./images/${screenshotWidth}/${loopCount + 1}-${(imageName != "/") ? imageName : "inicio"}.png`, fullPage: true});
             process.stdout.write(` ${loopCount + 1}`)
         }
-        process.stdout.write(` ] - ¡Resolución ${screenshotWidth} completada!\n`)
+        process.stdout.write(` ] - ¡Resolution ${screenshotWidth} completed!\n`)
     }
-    process.stdout.write('¡PROCESO COMPLETO!')
+    process.stdout.write('¡ALL PROCESSES COMPLETED!')
     browser.close();
 }
 
