@@ -27,7 +27,7 @@ A step by step guide on how to get a development environment running:
 1. Clone the repository
 
 ```
-git clone https://github.com/username/repository.git
+git clone https://github.com/DviadFer/web-auto-screenshot.git
 ```
 
 2. Install dependencies
