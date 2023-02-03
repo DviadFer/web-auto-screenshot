@@ -40,7 +40,9 @@ npm install
 
 Run `node index.js` in the console, pointing at the root directory of the repository. 
 
-It will create an `images` folder where it will store all the screenshots in subdirectories named with the specified resolutions. Check the comments in `index.js` for more information. 
+You can customize your website links within the array of `url.json` and width resolutions in `resolution.json`.
+
+It will create an `images` folder where it will store all the screenshots in subdirectories named with the specified resolutions. Check the comments in `index.js` and `tool.js` inside resources folder for more information. 
 
 > :heavy_check_mark: Open an issue if you need to raise any doubts or suggestions.
 
