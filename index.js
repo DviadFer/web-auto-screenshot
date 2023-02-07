@@ -21,11 +21,11 @@ async function run () {
         //Screenshot file loop
         for (let [loopCount, value] of url.entries()) {
             let imageName = tools.trimUrl(value);
-            await page.goto(value);
+            await page.goto(value, {waitUntil: 'networkidle0'});
             await page.screenshot({path: `./images/${screenshotWidth}/${loopCount + 1}-${(imageName != "/") ? imageName : "inicio"}.png`, fullPage: true}); //Remove fullPage:true if you want static screenshots without scroll.
             process.stdout.write(` ${loopCount + 1}`);
         }
-        process.stdout.write(` ] - ¡Resolution ${screenshotWidth} completed!\n`);
+        process.stdout.write(` ] - ¡${screenshotWidth} resolution  completed!\n`);
     }
     process.stdout.write('¡ALL PROCESSES COMPLETED!');
     browser.close();
