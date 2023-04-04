@@ -21,7 +21,7 @@ const getProjectName = (value) => {
  */
 const trimUrl = (value) => {
     let result = value.substring(
-        (value.lastIndexOf("/", (value.length - 1)) + 1), 
+        (value.lastIndexOf("/", (value.length - 2)) + 1), 
         value.lastIndexOf("/")
     );
     return result;
